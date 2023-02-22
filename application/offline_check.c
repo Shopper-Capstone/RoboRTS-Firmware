@@ -61,19 +61,19 @@ void offline_init(void)
 
   detect_device_add_event(&offline_dev, RC_OFFLINE_EVENT, 100, rc_offline_callback, NULL);
 
-  if (app == CHASSIS_APP)
-  {
-    detect_device_add_event(&offline_dev, MOTOR1_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[1]);
-    detect_device_add_event(&offline_dev, MOTOR2_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[2]);
-    detect_device_add_event(&offline_dev, MOTOR3_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[3]);
-    detect_device_add_event(&offline_dev, MOTOR4_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[4]);
-  }
-  else
-  {
-    detect_device_add_event(&offline_dev, YAW_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[5]);
-    detect_device_add_event(&offline_dev, PITCH_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[6]);
-    detect_device_add_event(&offline_dev, TURN_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[7]);
-  }
+//  if (app == CHASSIS_APP)
+//  {
+//    detect_device_add_event(&offline_dev, MOTOR1_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[1]);
+//    detect_device_add_event(&offline_dev, MOTOR2_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[2]);
+//    detect_device_add_event(&offline_dev, MOTOR3_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[3]);
+//    detect_device_add_event(&offline_dev, MOTOR4_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[4]);
+//  }
+//  else
+//  {
+//    detect_device_add_event(&offline_dev, YAW_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[5]);
+//    detect_device_add_event(&offline_dev, PITCH_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[6]);
+//    detect_device_add_event(&offline_dev, TURN_OFFLINE_EVENT, 100, offline_beep_set_times, &offline_beep_times[7]);
+//  }
 
   soft_timer_register(offline_check, NULL, 20);
   can_fifo0_rx_callback_register(&can1_manage, can1_detect_update);
@@ -96,6 +96,13 @@ int32_t offline_check(void *argc)
   }
   else
   {
+//		gimbal_yaw_enable(pgimbal);
+//    gimbal_pitch_enable(pgimbal);
+//    shoot_enable(pshoot);
+//    chassis_enable(pchassis);
+		
+		LED_R_ON();
+		
     gimbal_yaw_disable(pgimbal);
     gimbal_pitch_disable(pgimbal);
     shoot_disable(pshoot);
